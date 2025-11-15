@@ -2,9 +2,9 @@ package com.stockmarket;
 
 public class Portfolio {
 
-    private double cash;                     // dostępna gotówka
-    private StockHolding[] holdings;         // tablica przechowująca akcje
-    private int holdingsCount;               // ile pozycji jest aktualnie w tablicy
+    private double cash;
+    private StockHolding[] holdings;
+    private int holdingsCount;
 
     // Prywatna statyczna klasa wewnętrzna reprezentująca jedną pozycję w portfelu
     private static class StockHolding {
@@ -26,6 +26,9 @@ public class Portfolio {
 
     // Dodaje akcje do portfela
     public void addStock(Stock stock, int quantity) {
+        if(stock == null) throw new IllegalArgumentException("Stock nie może być null");
+        if(quantity <= 0) throw new IllegalArgumentException("Ilość musi być większa od 0");
+
         for (int i = 0; i < holdingsCount; i++) {
             if (holdings[i].stock.equals(stock)) {
                 holdings[i].quantity += quantity;
